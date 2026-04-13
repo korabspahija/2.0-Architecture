@@ -1,45 +1,90 @@
-/* 2.0 Architecture — main.js
- * Lightbox, nav scroll state, mobile menu
- */
+/* =============================================================================
+   2.0 ARCHITECTURE — main.js
+   Running-head updater · chapter reveals · lightbox · mobile menu
+   ============================================================================= */
 
 (function () {
     'use strict';
 
-    /* ---------------------------------------------------------------
-     * Nav: toggle scrolled state when hero leaves the viewport
-     * ------------------------------------------------------------- */
-    const nav = document.getElementById('nav');
-    const hero = document.getElementById('hero');
+    const $  = (sel, ctx = document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-    if (nav && hero && 'IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(
+    const runner        = $('#runner');
+    const runnerFolio   = $('#runnerFolio');
+    const runnerSection = $('#runnerSection');
+    const navToggle     = $('#navToggle');
+    const navLinks      = $('#navLinks');
+    const cover         = $('#hero');
+    const chapters      = $$('.chapter, .cover');
+    const sections      = $$('section[data-chapter], footer[data-chapter]');
+
+    /* ---------------------------------------------------------------
+     * Runner: toggle "scrolled" state once the cover leaves the top
+     * ------------------------------------------------------------- */
+
+    if (runner && cover && 'IntersectionObserver' in window) {
+        const scrollObs = new IntersectionObserver(
+            (entries) => entries.forEach(e => {
+                runner.classList.toggle('scrolled', !e.isIntersecting);
+            }),
+            { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
+        );
+        scrollObs.observe(cover);
+    }
+
+    /* ---------------------------------------------------------------
+     * Runner: update folio + section label as chapters pass the
+     * horizontal sightline in the middle of the viewport
+     * ------------------------------------------------------------- */
+
+    if (runnerFolio && runnerSection && sections.length && 'IntersectionObserver' in window) {
+        const labelObs = new IntersectionObserver(
             (entries) => {
-                entries.forEach((entry) => {
-                    nav.classList.toggle('scrolled', !entry.isIntersecting);
+                entries.forEach(e => {
+                    if (!e.isIntersecting) return;
+                    const { chapter, name } = e.target.dataset;
+                    if (chapter) runnerFolio.textContent = chapter;
+                    if (name)    runnerSection.textContent = name;
                 });
             },
-            { rootMargin: '-80px 0px 0px 0px', threshold: 0 }
+            { rootMargin: '-42% 0px -52% 0px', threshold: 0 }
         );
-        observer.observe(hero);
+        sections.forEach(s => labelObs.observe(s));
+    }
+
+    /* ---------------------------------------------------------------
+     * Chapter reveals — add .in-view once the chapter appears
+     * ------------------------------------------------------------- */
+
+    if (chapters.length && 'IntersectionObserver' in window) {
+        const revealObs = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('in-view');
+                        revealObs.unobserve(e.target);
+                    }
+                });
+            },
+            { rootMargin: '0px 0px -12% 0px', threshold: 0.05 }
+        );
+        chapters.forEach(c => revealObs.observe(c));
     }
 
     /* ---------------------------------------------------------------
      * Mobile menu toggle
      * ------------------------------------------------------------- */
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
 
-    if (navToggle && nav) {
+    if (runner && navToggle) {
         navToggle.addEventListener('click', () => {
-            const open = nav.classList.toggle('open');
+            const open = runner.classList.toggle('open');
             navToggle.setAttribute('aria-expanded', String(open));
         });
 
-        // Close the menu when a link is tapped (mobile)
         if (navLinks) {
-            navLinks.querySelectorAll('a').forEach((link) => {
-                link.addEventListener('click', () => {
-                    nav.classList.remove('open');
+            navLinks.querySelectorAll('a').forEach((a) => {
+                a.addEventListener('click', () => {
+                    runner.classList.remove('open');
                     navToggle.setAttribute('aria-expanded', 'false');
                 });
             });
@@ -49,47 +94,61 @@
     /* ---------------------------------------------------------------
      * Lightbox
      * ------------------------------------------------------------- */
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const lbCaption = document.getElementById('lbCaption');
-    const lbClose = document.getElementById('lbClose');
-    const lbPrev = document.getElementById('lbPrev');
-    const lbNext = document.getElementById('lbNext');
 
-    const projectsSection = document.getElementById('projects');
-    const projects = projectsSection
-        ? Array.from(projectsSection.querySelectorAll('.project'))
-        : [];
+    const lightbox  = $('#lightbox');
+    const lbImg     = $('#lbImg');
+    const lbName    = $('#lbName');
+    const lbMeta    = $('#lbMeta');
+    const lbCounter = $('#lbCounter');
+    const lbClose   = $('#lbClose');
+    const lbPrev    = $('#lbPrev');
+    const lbNext    = $('#lbNext');
 
+    const folioItems = $$('.folio__item');
     let currentIndex = -1;
 
+    const pad2 = (n) => String(n).padStart(2, '0');
+
+    const extractMeta = (item) => {
+        const name = $('.folio__name', item)?.textContent.trim() ?? '';
+        const year = $('.folio__y', item)?.textContent.trim() ?? '';
+        const dds  = $$('.folio__data dd', item).map(el => el.textContent.trim());
+        // data order: [Coord, Scope, Typology, Status]
+        const typology = dds[2] || '';
+        return { name, year, typology };
+    };
+
     const openLightbox = (index) => {
-        if (index < 0 || index >= projects.length) return;
+        if (!lightbox || index < 0 || index >= folioItems.length) return;
+
         currentIndex = index;
+        const item = folioItems[index];
+        const img  = $('img', item);
+        const { name, year, typology } = extractMeta(item);
 
-        const project = projects[index];
-        const img = project.querySelector('img');
-        const title = project.querySelector('.project__title');
-        const meta = project.querySelector('.project__meta');
-
-        if (img) {
+        if (img && img.src) {
             lbImg.src = img.src;
-            lbImg.alt = img.alt || '';
+            lbImg.alt = img.alt || name;
+        } else {
+            lbImg.removeAttribute('src');
+            lbImg.alt = '';
         }
 
-        const titleText = title ? title.textContent.trim() : '';
-        const metaText = meta ? meta.textContent.trim() : '';
-        lbCaption.textContent = [titleText, metaText].filter(Boolean).join(' · ');
+        if (lbName) lbName.textContent = name;
+        if (lbMeta) lbMeta.textContent = [year, typology].filter(Boolean).join(' · ');
+        if (lbCounter) {
+            lbCounter.textContent = `№ ${pad2(index + 1)} / ${pad2(folioItems.length)}`;
+        }
 
         lightbox.classList.add('open');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.classList.add('lightbox-open');
 
-        // Move focus to the close button so keyboard users can escape
         if (lbClose) lbClose.focus();
     };
 
     const closeLightbox = () => {
+        if (!lightbox) return;
         lightbox.classList.remove('open');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('lightbox-open');
@@ -98,33 +157,37 @@
 
     const step = (delta) => {
         if (currentIndex < 0) return;
-        const next = (currentIndex + delta + projects.length) % projects.length;
+        const next = (currentIndex + delta + folioItems.length) % folioItems.length;
         openLightbox(next);
     };
 
-    if (projectsSection && lightbox) {
-        projectsSection.addEventListener('click', (e) => {
-            const project = e.target.closest('.project');
-            if (!project) return;
-            const index = projects.indexOf(project);
-            if (index !== -1) openLightbox(index);
-        });
+    if (lightbox && folioItems.length) {
+        // Delegate clicks on the Works section
+        const works = $('#projects');
+        if (works) {
+            works.addEventListener('click', (e) => {
+                const item = e.target.closest('.folio__item');
+                if (!item) return;
+                const index = folioItems.indexOf(item);
+                if (index !== -1) openLightbox(index);
+            });
+        }
 
         if (lbClose) lbClose.addEventListener('click', closeLightbox);
-        if (lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
-        if (lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); step(1); });
+        if (lbPrev)  lbPrev.addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
+        if (lbNext)  lbNext.addEventListener('click', (e) => { e.stopPropagation(); step( 1); });
 
-        // Click on the backdrop (but not the image/figure) closes
+        // Click on the backdrop closes
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) closeLightbox();
         });
 
-        // Keyboard: Esc closes, arrows navigate
+        // Keyboard controls
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('open')) return;
-            if (e.key === 'Escape') closeLightbox();
-            else if (e.key === 'ArrowLeft') step(-1);
-            else if (e.key === 'ArrowRight') step(1);
+            if (e.key === 'Escape')     closeLightbox();
+            else if (e.key === 'ArrowLeft')  step(-1);
+            else if (e.key === 'ArrowRight') step( 1);
         });
     }
 })();

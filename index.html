@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2.0 Architecture</title>
-    <meta name="description" content="2.0 Architecture — studio based in Kosovo. Contemporary residential and public architecture.">
+    <title>2.0 Architecture — Studio Monograph</title>
+    <meta name="description" content="2.0 Architecture. A studio of architecture in Pristina, Kosovo. Works 2022–2024.">
 
     <meta property="og:title" content="2.0 Architecture">
-    <meta property="og:description" content="Architecture studio based in Kosovo.">
+    <meta property="og:description" content="A studio of architecture in Pristina, Kosovo.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="images/hero/hero.jpg">
 
@@ -15,148 +15,291 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <nav class="nav" id="nav">
-        <a href="#hero" class="nav__mark">2.0 ARCHITECTURE</a>
-        <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
-            <span></span><span></span><span></span>
+    <div class="grain" aria-hidden="true"></div>
+
+    <nav class="runner" id="runner">
+        <a href="#hero" class="runner__mark">
+            <span class="runner__mark-num">2.0</span>
+            <span class="runner__mark-word">Architecture</span>
+        </a>
+
+        <div class="runner__center" aria-hidden="true">
+            <span class="runner__folio" id="runnerFolio">I</span>
+            <span class="runner__dash">—</span>
+            <span class="runner__section" id="runnerSection">Cover</span>
+        </div>
+
+        <button class="runner__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span>
         </button>
-        <ul class="nav__links" id="navLinks">
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+
+        <ul class="runner__links" id="navLinks">
+            <li><a href="#projects"><i>ii</i> Works</a></li>
+            <li><a href="#about"><i>iii</i> Statement</a></li>
+            <li><a href="#contact"><i>iv</i> Colophon</a></li>
         </ul>
     </nav>
 
-    <header class="hero" id="hero">
-        <div class="hero__image" style="background-image: url('images/hero/hero.jpg');" role="img" aria-label="Studio hero image"></div>
-        <div class="hero__wordmark">
-            <span class="hero__line">2.0</span>
-            <span class="hero__line">ARCHITECTURE</span>
+    <!-- I ─ COVER ─────────────────────────────────────────────────────── -->
+    <section class="cover" id="hero" data-chapter="I" data-name="Cover">
+        <div class="cover__bg" style="background-image: url('images/hero/hero.jpg');" aria-hidden="true"></div>
+        <div class="cover__veil" aria-hidden="true"></div>
+        <div class="cover__grid" aria-hidden="true"></div>
+
+        <div class="cover__corner cover__corner--tl">
+            <span class="label">Folio</span>
+            <span class="value">№ I</span>
         </div>
-    </header>
-
-    <section class="section section--projects" id="projects">
-        <header class="section__head">
-            <h2 class="section__title">Projects</h2>
-        </header>
-
-        <div class="projects">
-            <figure class="project" data-index="0">
-                <div class="project__media">
-                    <img src="images/projects/01.jpg" alt="Villa Prizren" loading="lazy">
-                </div>
-                <figcaption class="project__caption">
-                    <span class="project__title">Villa Prizren</span>
-                    <span class="project__meta">2024 · Private Residence</span>
-                </figcaption>
-            </figure>
-
-            <figure class="project" data-index="1">
-                <div class="project__media">
-                    <img src="images/projects/02.jpg" alt="Skanderbeg Pavilion" loading="lazy">
-                </div>
-                <figcaption class="project__caption">
-                    <span class="project__title">Skanderbeg Pavilion</span>
-                    <span class="project__meta">2024 · Public</span>
-                </figcaption>
-            </figure>
-
-            <figure class="project" data-index="2">
-                <div class="project__media">
-                    <img src="images/projects/03.jpg" alt="Rugova House" loading="lazy">
-                </div>
-                <figcaption class="project__caption">
-                    <span class="project__title">Rugova House</span>
-                    <span class="project__meta">2023 · Private Residence</span>
-                </figcaption>
-            </figure>
-
-            <figure class="project" data-index="3">
-                <div class="project__media">
-                    <img src="images/projects/04.jpg" alt="Atelier Pristina" loading="lazy">
-                </div>
-                <figcaption class="project__caption">
-                    <span class="project__title">Atelier Pristina</span>
-                    <span class="project__meta">2023 · Commercial</span>
-                </figcaption>
-            </figure>
-
-            <figure class="project" data-index="4">
-                <div class="project__media">
-                    <img src="images/projects/05.jpg" alt="Lake House Ohrid" loading="lazy">
-                </div>
-                <figcaption class="project__caption">
-                    <span class="project__title">Lake House Ohrid</span>
-                    <span class="project__meta">2022 · Private Residence</span>
-                </figcaption>
-            </figure>
-
-            <figure class="project" data-index="5">
-                <div class="project__media">
-                    <img src="images/projects/06.jpg" alt="Gjakova Cultural Center" loading="lazy">
-                </div>
-                <figcaption class="project__caption">
-                    <span class="project__title">Gjakova Cultural Center</span>
-                    <span class="project__meta">2022 · Public</span>
-                </figcaption>
-            </figure>
+        <div class="cover__corner cover__corner--tr">
+            <span class="label">Studio Monograph</span>
+            <span class="value">MMXXVI · Kosovo</span>
         </div>
+        <div class="cover__corner cover__corner--bl">
+            <span class="label">Latitude</span>
+            <span class="value">42.6629°N</span>
+        </div>
+        <div class="cover__corner cover__corner--br">
+            <span class="label">Longitude</span>
+            <span class="value">21.1655°E</span>
+        </div>
+
+        <div class="cover__mark">
+            <span class="cover__two" aria-hidden="true">2.0</span>
+            <span class="cover__rule" aria-hidden="true"></span>
+            <span class="cover__word">Architecture</span>
+        </div>
+
+        <div class="cover__meta">
+            <span>Pristina</span>
+            <span class="dot">·</span>
+            <span>Est. MMXXIV</span>
+            <span class="dot">·</span>
+            <span>A Studio of Architecture</span>
+        </div>
+
+        <a href="#projects" class="cover__turn" aria-label="Turn the page">
+            <span class="cover__turn-text">Turn the page</span>
+            <svg class="cover__turn-arrow" viewBox="0 0 12 36" aria-hidden="true">
+                <line x1="6" y1="0" x2="6" y2="30" stroke="currentColor" stroke-width="0.5"/>
+                <polyline points="2,26 6,34 10,26" fill="none" stroke="currentColor" stroke-width="0.5"/>
+            </svg>
+        </a>
     </section>
 
-    <section class="section section--about" id="about">
-        <header class="section__head">
-            <h2 class="section__title">About</h2>
+    <!-- II ─ WORKS ────────────────────────────────────────────────────── -->
+    <section class="chapter chapter--works" id="projects" data-chapter="II" data-name="Works">
+        <header class="chapter__head">
+            <div class="chapter__num">— ii —</div>
+            <h2 class="chapter__title"><em>Works</em></h2>
+            <div class="chapter__sub">Six projects, MMXXII–MMXXIV. Residential, public, and commercial.</div>
         </header>
-        <p class="about__text">
-            2.0 Architecture is a studio based in Kosovo working across residential, public, and commercial projects.
-            We approach each site as a conversation between material, light, and landscape —
-            pursuing architecture that is quiet, precise, and rooted in its place.
-        </p>
+
+        <ol class="folio" role="list">
+
+            <article class="folio__item" data-index="0">
+                <header class="folio__label">
+                    <span class="folio__n">№ 01</span>
+                    <span class="folio__y">MMXXIV</span>
+                </header>
+                <figure class="folio__frame">
+                    <img src="images/projects/01.jpg" alt="Villa Prizren" loading="lazy" onerror="this.style.display='none'">
+                </figure>
+                <div class="folio__body">
+                    <h3 class="folio__name"><em>Villa Prizren</em></h3>
+                    <dl class="folio__data">
+                        <div><dt>Coord.</dt><dd>42.2166°N, 20.7417°E</dd></div>
+                        <div><dt>Scope</dt><dd>New build</dd></div>
+                        <div><dt>Typology</dt><dd>Private residence</dd></div>
+                        <div><dt>Status</dt><dd>Complete</dd></div>
+                    </dl>
+                </div>
+            </article>
+
+            <article class="folio__item" data-index="1">
+                <header class="folio__label">
+                    <span class="folio__n">№ 02</span>
+                    <span class="folio__y">MMXXIV</span>
+                </header>
+                <figure class="folio__frame">
+                    <img src="images/projects/02.jpg" alt="Skanderbeg Pavilion" loading="lazy" onerror="this.style.display='none'">
+                </figure>
+                <div class="folio__body">
+                    <h3 class="folio__name"><em>Skanderbeg Pavilion</em></h3>
+                    <dl class="folio__data">
+                        <div><dt>Coord.</dt><dd>42.6629°N, 21.1655°E</dd></div>
+                        <div><dt>Scope</dt><dd>Pavilion</dd></div>
+                        <div><dt>Typology</dt><dd>Public</dd></div>
+                        <div><dt>Status</dt><dd>Complete</dd></div>
+                    </dl>
+                </div>
+            </article>
+
+            <article class="folio__item" data-index="2">
+                <header class="folio__label">
+                    <span class="folio__n">№ 03</span>
+                    <span class="folio__y">MMXXIII</span>
+                </header>
+                <figure class="folio__frame">
+                    <img src="images/projects/03.jpg" alt="Rugova House" loading="lazy" onerror="this.style.display='none'">
+                </figure>
+                <div class="folio__body">
+                    <h3 class="folio__name"><em>Rugova House</em></h3>
+                    <dl class="folio__data">
+                        <div><dt>Coord.</dt><dd>42.6850°N, 20.2940°E</dd></div>
+                        <div><dt>Scope</dt><dd>New build</dd></div>
+                        <div><dt>Typology</dt><dd>Private residence</dd></div>
+                        <div><dt>Status</dt><dd>Complete</dd></div>
+                    </dl>
+                </div>
+            </article>
+
+            <article class="folio__item" data-index="3">
+                <header class="folio__label">
+                    <span class="folio__n">№ 04</span>
+                    <span class="folio__y">MMXXIII</span>
+                </header>
+                <figure class="folio__frame">
+                    <img src="images/projects/04.jpg" alt="Atelier Pristina" loading="lazy" onerror="this.style.display='none'">
+                </figure>
+                <div class="folio__body">
+                    <h3 class="folio__name"><em>Atelier Pristina</em></h3>
+                    <dl class="folio__data">
+                        <div><dt>Coord.</dt><dd>42.6629°N, 21.1655°E</dd></div>
+                        <div><dt>Scope</dt><dd>Interior</dd></div>
+                        <div><dt>Typology</dt><dd>Commercial</dd></div>
+                        <div><dt>Status</dt><dd>Complete</dd></div>
+                    </dl>
+                </div>
+            </article>
+
+            <article class="folio__item" data-index="4">
+                <header class="folio__label">
+                    <span class="folio__n">№ 05</span>
+                    <span class="folio__y">MMXXII</span>
+                </header>
+                <figure class="folio__frame">
+                    <img src="images/projects/05.jpg" alt="Lake House Ohrid" loading="lazy" onerror="this.style.display='none'">
+                </figure>
+                <div class="folio__body">
+                    <h3 class="folio__name"><em>Lake House Ohrid</em></h3>
+                    <dl class="folio__data">
+                        <div><dt>Coord.</dt><dd>41.1172°N, 20.8019°E</dd></div>
+                        <div><dt>Scope</dt><dd>New build</dd></div>
+                        <div><dt>Typology</dt><dd>Private residence</dd></div>
+                        <div><dt>Status</dt><dd>Complete</dd></div>
+                    </dl>
+                </div>
+            </article>
+
+            <article class="folio__item" data-index="5">
+                <header class="folio__label">
+                    <span class="folio__n">№ 06</span>
+                    <span class="folio__y">MMXXII</span>
+                </header>
+                <figure class="folio__frame">
+                    <img src="images/projects/06.jpg" alt="Gjakova Cultural Center" loading="lazy" onerror="this.style.display='none'">
+                </figure>
+                <div class="folio__body">
+                    <h3 class="folio__name"><em>Gjakova Cultural Center</em></h3>
+                    <dl class="folio__data">
+                        <div><dt>Coord.</dt><dd>42.3803°N, 20.4308°E</dd></div>
+                        <div><dt>Scope</dt><dd>Adaptive reuse</dd></div>
+                        <div><dt>Typology</dt><dd>Public</dd></div>
+                        <div><dt>Status</dt><dd>Complete</dd></div>
+                    </dl>
+                </div>
+            </article>
+
+        </ol>
     </section>
 
-    <footer class="footer" id="contact">
-        <header class="section__head">
-            <h2 class="section__title">Contact</h2>
+    <!-- III ─ STATEMENT ──────────────────────────────────────────────── -->
+    <section class="chapter chapter--statement" id="about" data-chapter="III" data-name="Statement">
+        <header class="chapter__head">
+            <div class="chapter__num">— iii —</div>
+            <h2 class="chapter__title"><em>Statement</em></h2>
+            <div class="chapter__sub">On material, light, and the landscape of Kosovo.</div>
         </header>
 
-        <div class="footer__grid">
-            <div class="footer__col">
-                <span class="footer__label">Studio</span>
-                <p>Pristina, Kosovo</p>
+        <article class="statement">
+            <p class="statement__lead"><span class="drop">T</span>wo point zero Architecture is a studio based in Pristina, working across residential, public, and commercial projects throughout Kosovo and the Balkans. We approach each commission as a conversation between material, light, and the particular landscape of a place.</p>
+
+            <aside class="pull">
+                <span class="pull__mark">&ldquo;</span>
+                <em>Architecture is the will of an epoch translated into space.</em>
+                <span class="pull__attr">— a reminder, from Mies.</span>
+            </aside>
+
+            <p>The studio is small by design. Each drawing passes through the same hands from first sketch to final detail. What we build is quiet, precise, and intended to settle slowly into its place &mdash; to age rather than expire.</p>
+
+            <p class="statement__sign">
+                <span class="statement__sign-mark">2.0</span>
+                <span class="statement__sign-text">Pristina &mdash; MMXXVI</span>
+            </p>
+        </article>
+    </section>
+
+    <!-- IV ─ COLOPHON ────────────────────────────────────────────────── -->
+    <footer class="chapter chapter--colophon" id="contact" data-chapter="IV" data-name="Colophon">
+        <header class="chapter__head">
+            <div class="chapter__num">— iv —</div>
+            <h2 class="chapter__title"><em>Colophon</em></h2>
+            <div class="chapter__sub">Correspondence &amp; credits.</div>
+        </header>
+
+        <dl class="colophon">
+            <div class="colophon__row">
+                <dt>Studio</dt>
+                <dd>
+                    <span>Pristina, Kosovo</span>
+                </dd>
             </div>
-            <div class="footer__col">
-                <span class="footer__label">Reach</span>
-                <p>
-                    <a href="mailto:hello@2-0architecture.com">hello@2-0architecture.com</a><br>
+            <div class="colophon__row">
+                <dt>Correspondence</dt>
+                <dd>
+                    <a href="mailto:hello@2-0architecture.com">hello@2-0architecture.com</a>
+                    <span class="sep">/</span>
                     <a href="tel:+38300000000">+383 00 000 000</a>
-                </p>
+                </dd>
             </div>
-            <div class="footer__col">
-                <span class="footer__label">Follow</span>
-                <p>
-                    <a href="https://www.instagram.com/2.0architecture/" target="_blank" rel="noopener">Instagram</a>
-                </p>
+            <div class="colophon__row">
+                <dt>Correspondents</dt>
+                <dd>
+                    <a href="https://www.instagram.com/2.0architecture/" target="_blank" rel="noopener">Instagram <em>@2.0architecture</em></a>
+                </dd>
             </div>
-        </div>
+        </dl>
 
-        <div class="footer__bottom">
-            <span>&copy; 2026 2.0 Architecture</span>
-        </div>
+        <p class="colophon__note">
+            Set in <em>Fraunces</em> &amp; <em>IBM Plex Mono</em>. Typeset and composed in Pristina. <br>
+            &copy; MMXXVI 2.0 Architecture. All projects and photographs remain the property of their authors.
+        </p>
     </footer>
 
+    <!-- LIGHTBOX ─────────────────────────────────────────────────────── -->
     <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
-        <button class="lightbox__close" id="lbClose" aria-label="Close">&times;</button>
-        <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous">&#8592;</button>
-        <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next">&#8594;</button>
+        <div class="lightbox__topbar">
+            <span class="lightbox__counter" id="lbCounter">№ — / —</span>
+            <button class="lightbox__close" id="lbClose" aria-label="Close">&times;</button>
+        </div>
+
+        <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous"><em>&larr;</em></button>
+        <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next"><em>&rarr;</em></button>
+
         <figure class="lightbox__figure">
-            <img class="lightbox__img" id="lbImg" src="" alt="">
-            <figcaption class="lightbox__caption" id="lbCaption"></figcaption>
+            <div class="lightbox__mat">
+                <img class="lightbox__img" id="lbImg" src="" alt="">
+            </div>
+            <figcaption class="lightbox__caption">
+                <span class="lightbox__name" id="lbName"></span>
+                <span class="lightbox__meta" id="lbMeta"></span>
+            </figcaption>
         </figure>
     </div>
 
