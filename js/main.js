@@ -72,6 +72,26 @@
     }
 
     /* ---------------------------------------------------------------
+     * Folio items reveal — stagger in as each enters the viewport
+     * ------------------------------------------------------------- */
+
+    if ('IntersectionObserver' in window) {
+        const items = $$('.folio__item');
+        if (items.length) {
+            const itemObs = new IntersectionObserver(
+                (entries) => entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('in-view');
+                        itemObs.unobserve(e.target);
+                    }
+                }),
+                { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+            );
+            items.forEach(it => itemObs.observe(it));
+        }
+    }
+
+    /* ---------------------------------------------------------------
      * Mobile menu toggle
      * ------------------------------------------------------------- */
 
@@ -135,7 +155,8 @@
         }
 
         if (lbName) lbName.textContent = name;
-        if (lbMeta) lbMeta.textContent = [year, typology].filter(Boolean).join(' · ');
+        // Only show subtitle meta when there's rich data (typology); otherwise leave blank
+        if (lbMeta) lbMeta.textContent = typology ? [year, typology].filter(Boolean).join(' · ') : '';
         if (lbCounter) {
             lbCounter.textContent = `№ ${pad2(index + 1)} / ${pad2(folioItems.length)}`;
         }
